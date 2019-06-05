@@ -5,28 +5,23 @@ MAINTAINER mislav.novakovic@sartura.hr
 RUN \
       apt-get update && apt-get install -y \
       wget \
-      # general tools
       git \
       cmake \
       build-essential \
       vim \
       supervisor \
-      # libyang
       libpcre3-dev \
       pkg-config \
-      # sysrepo
       libavl-dev \
       libev-dev \
       libprotobuf-c-dev \
       protobuf-c-compiler \
-      # netopeer2 \
       libssh-dev \
       libssl-dev \
-      # bindings
       swig \
       python-dev
 
-# add netconf user
+# add new netconf user
 RUN \
     adduser --system netconf && \
     echo "netconf:netconf" | chpasswd
