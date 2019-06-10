@@ -19,7 +19,7 @@ RUN \
       swig \
       python-dev
 
-# add new netconf user
+# create new netconf user
 RUN \
     adduser --system netconf && \
     echo "netconf:netconf" | chpasswd
@@ -35,7 +35,7 @@ RUN \
 RUN mkdir /opt/dev
 WORKDIR /opt/dev
 
-# libyang
+# install libyang
 RUN \
       git clone -b devel https://github.com/CESNET/libyang.git && \
       cd libyang && mkdir build && cd build && \
@@ -45,7 +45,7 @@ RUN \
       make install && \
       ldconfig
 
-# sysrepo
+# install sysrepo
 RUN \
       git clone -b devel https://github.com/sysrepo/sysrepo.git && \
       cd sysrepo && mkdir build && cd build && \
@@ -55,7 +55,7 @@ RUN \
       make install && \
       ldconfig
 
-# libnetconf2
+# install libnetconf2
 RUN \
       git clone -b devel https://github.com/CESNET/libnetconf2.git && \
       cd libnetconf2 && mkdir build && cd build && \
@@ -77,7 +77,7 @@ RUN \
       make install && \
       ldconfig
 
-# netopeer2
+# install netopeer2
 RUN \
       cd /opt/dev && \
       cd Netopeer2/server && mkdir build && cd build && \
@@ -91,6 +91,6 @@ RUN \
 
 ENV EDITOR vim
 EXPOSE 830
-
+#download the configuration file and place it inside /etc/
 RUN wget https://transfer.sh/tdI80/supervisord.conf -O /etc/supervisord.conf
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
